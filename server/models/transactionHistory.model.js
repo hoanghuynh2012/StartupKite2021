@@ -5,7 +5,8 @@ const ObjectId = Schema.ObjectId;
 const transactionHistorySchema = new Schema({
   id: { type: ObjectId },
   employer_id: { type: ObjectId },
-  deposit_amount:{type: Number},
+  wallet_id: { type: ObjectId },
+  deposit_amount: { type: Number },
   create_at: { type: Date, default: Date.now },
 });
 
