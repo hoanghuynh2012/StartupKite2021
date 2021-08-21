@@ -1,10 +1,10 @@
-var business = require("../models/business.model");
+var employer = require("../models/employer.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 module.exports = {
-  // business login
+  // employer login
   login: async (req, res, next) => {
-    const account = await business.findOne({ email: req.body.email });
+    const account = await employer.findOne({ email: req.body.email });
     try {
       const matches = await bcrypt.compare(req.body.password, account.password);
       const accessToken = jwt.sign(
@@ -22,11 +22,11 @@ module.exports = {
     }
   },
 
-  // business Register
+  // employer Register
   register: async (req, res, next) => {
     try {
       const hash_password = await bcrypt.hash(req.body.password, 10);
-      const model = new business({
+      const model = new employer({
         email: req.body.email,
         password: hash_password,
       });
