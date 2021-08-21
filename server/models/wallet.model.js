@@ -5,7 +5,6 @@ const ObjectId = Schema.ObjectId;
 const walletSchema = new Schema({
   id: { type: ObjectId },
   employer_id: { type: ObjectId },
-  transactionHistory_id: { type: ObjectId },
   balance: { type: Number },
 });
 

@@ -1,6 +1,7 @@
 var employer = require("../models/employer.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+var wallet = require("../models/wallet.model");
 module.exports = {
   // employer login
   login: async (req, res, next) => {
@@ -32,7 +33,16 @@ module.exports = {
       });
       model.save((error) => {
         if (error) res.json({ msg: error.message });
-        else res.json({ msg: "success" });
+        else {
+          const walletModel = new wallet({
+            employer_id: model._id,
+            balance: 0,
+          });
+          walletModel.save((error) => {
+            if (error) res.json({ msg: error.message });
+            else res.json({ msg: "success" });
+          });
+        }
       });
     } catch (error) {
       console.log(error.message);
