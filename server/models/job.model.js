@@ -7,14 +7,16 @@ const jobSchema = new Schema({
   title: { type: String },
   employer_id: { type: ObjectId },
   benefit: { type: String },
-  experience: { type: String },
-  gender_requirement: { type: String },
-  create_at: { type: Date, default: Date.now },
-  level_requirement: { type: String },
-  job_requirement: { type: String },
-  job_description: { type: String },
+  experience_reqirements: { type: String },
+  gender_requirements: { type: String },
+  level_requirements: { type: String },
+  job_requirements: { type: String },
+  job_descriptions: { type: String },
   work_place: { type: String },
   wage: { type: String },
+  create_at: { type: Date, default: Date.now },
+  role: { type: Number },
+  status: { type: Boolean, default: true },
 });
 
 module.exports = mongoose.model("Jobs", jobSchema);

@@ -5,7 +5,7 @@ const ObjectId = Schema.ObjectId;
 const employerSchema = new Schema({
   id: { type: ObjectId },
   email: { type: String, unique: true },
-  password: { type: String, unique: true },
+  password: { type: String },
   employer_name: { type: String, default: "" },
   phone_number: { type: String, default: "" },
   owner_name: { type: String, default: "" },
