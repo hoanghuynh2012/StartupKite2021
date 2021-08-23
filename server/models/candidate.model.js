@@ -16,4 +16,5 @@ const candidateSchema = new Schema({
   role: { type: Number },
 });
 
-module.exports = mongoose.model("Candidate", candidateSchema);
+module.exports = mongoose.model("Candidates", candidateSchema);
+
