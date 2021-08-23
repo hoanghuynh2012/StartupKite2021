@@ -7,6 +7,7 @@ const appliedJobSchema = new Schema({
   user_id: { type: ObjectId },
   job_id: { type: ObjectId },
   apply_at: { type: Date, default: Date.now },
+  status: { type: Boolean, default: true },
 });
 
 module.exports = mongoose.model("AppliedJobs", appliedJobSchema);

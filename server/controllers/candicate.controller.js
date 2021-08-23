@@ -1,10 +1,10 @@
-var user = require("../models/user.model");
+var candicate = require("../models/candicate.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 module.exports = {
   // user login
   login: async (req, res, next) => {
-    const account = await user.findOne({ email: req.body.email });
+    const account = await candicate.findOne({ email: req.body.email });
     try {
       const matches = await bcrypt.compare(req.body.password, account.password);
       const accessToken = jwt.sign(
@@ -26,7 +26,7 @@ module.exports = {
   register: async (req, res, next) => {
     try {
       const hash_password = await bcrypt.hash(req.body.password, 10);
-      const model = new user({
+      const model = new candicate({
         email: req.body.email,
         password: hash_password,
       });

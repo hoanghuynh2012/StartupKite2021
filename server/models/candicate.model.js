@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const userSchema = new Schema({
+const candicateSchema = new Schema({
   id: { type: ObjectId },
   email: { type: String, unique: true },
   password: { type: String },
   phone_number: { type: String, default: "" },
+  fullname: { type: String, default: "" },
   avatar: { type: String, default: "" },
   date_of_birth: { type: Date, default: null },
   gender: { type: String, default: "" },
@@ -15,4 +16,4 @@ const userSchema = new Schema({
   role: { type: Number },
 });
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("Candicates", candicateSchema);
