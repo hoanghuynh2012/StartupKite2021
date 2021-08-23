@@ -7,7 +7,7 @@ const candidateSchema = new Schema({
   email: { type: String, unique: true },
   password: { type: String },
   phone_number: { type: String, default: "" },
-  fullname: { type: String, default: "" },
+  full_name: { type: String, default: "" },
   avatar: { type: String, default: "" },
   date_of_birth: { type: Date, default: null },
   gender: { type: String, default: "" },
@@ -17,3 +17,4 @@ const candidateSchema = new Schema({
 });
 
 module.exports = mongoose.model("Candidates", candidateSchema);
+

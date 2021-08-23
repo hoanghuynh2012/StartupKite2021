@@ -10,7 +10,9 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var employerRouter = require("./routes/employer.routes");
 var candidateRouter = require("./routes/candidate.routes");
+var jobRouter = require("./routes/job.routes");
 var managerRouter = require("./routes/manager.routes");
+
 
 var app = express();
 var mongoose = require("mongoose");
@@ -52,7 +54,9 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/employer", employerRouter);
 app.use("/candidate", candidateRouter);
+app.use("/job", jobRouter);
 app.use("/manager", managerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -64,10 +68,9 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.send("Error API (check phương thức get post)");
 });
 
 module.exports = app;
