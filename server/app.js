@@ -13,6 +13,7 @@ var candidateRouter = require("./routes/candidate.routes");
 var jobRouter = require("./routes/job.routes");
 var managerRouter = require("./routes/manager.routes");
 var walletRouter = require("./routes/wallet.routes");
+var transactionRouter = require("./routes/transaction.routes");
 
 
 var app = express();
@@ -58,6 +59,7 @@ app.use("/candidate", candidateRouter);
 app.use("/job", jobRouter);
 app.use("/manager", managerRouter);
 app.use("/wallet", walletRouter);
+app.use("/transaction", transactionRouter);
 
 
 // catch 404 and forward to error handler
