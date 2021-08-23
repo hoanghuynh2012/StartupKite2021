@@ -6,6 +6,6 @@ var controller = require("../controllers/manager.controller");
 
 router.post("/login", controller.login); // login
 
-// router.post("/register", controller.register);
+
 
 module.exports = router;
