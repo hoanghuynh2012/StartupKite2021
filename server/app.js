@@ -11,6 +11,7 @@ var usersRouter = require("./routes/users");
 var employerRouter = require("./routes/employer.routes");
 var candidateRouter = require("./routes/candidate.routes");
 var managerRouter = require("./routes/manager.routes");
+var walletRouter = require("./routes/wallet.routes");
 
 var app = express();
 var mongoose = require("mongoose");
@@ -53,6 +54,7 @@ app.use("/users", usersRouter);
 app.use("/employer", employerRouter);
 app.use("/candidate", candidateRouter);
 app.use("/manager", managerRouter);
+app.use("/wallet", walletRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
