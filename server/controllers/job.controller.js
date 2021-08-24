@@ -44,7 +44,7 @@ module.exports = {
   // edit job (sửa job bởi doanh nghiệp);
   editJob: async (req, res, next) => {
     try {
-      if (dataIsValid) {
+      if (dataIsValid(req.body)) {
         const {
           id,
           title,
