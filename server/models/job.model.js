@@ -6,7 +6,7 @@ const employer = require("../models/employer.model");
 const jobSchema = new Schema({
   id: { type: ObjectId },
   title: { type: String },
-  employer_id: { type: Schema.Types.ObjectId, ref: "Employers" },
+  employer_id: { type: ObjectId, ref: "Employers" },
   benefit: { type: String },
   experience_requirements: { type: String },
   gender_requirements: { type: String },

@@ -5,10 +5,10 @@ const ObjectId = Schema.ObjectId;
 const managerSchema = new Schema({
   id: { type: ObjectId },
   username: { type: String, unique: true },
-  email: { type: String, unique: true, default: "" },
+  email: { type: String, unique: true },
   password: { type: String },
-  phone_number: { type: String, default: "" },
-  role: { type: Number, default: 0 },
+  phone_number: { type: String },
+  role: { type: Number },
 });
 
 module.exports = mongoose.model("Managers", managerSchema);
