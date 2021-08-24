@@ -2,52 +2,97 @@ var employer = require("../models/employer.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 var wallet = require("../models/wallet.model");
-var employer = require("../models/employer.model");
+
+const validateEmail = (email) => {
+  var re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
+const dataIsValid = (data) => {
+  for (let i in data) {
+    if (typeof data[i] === "string") {
+      if (data[i].trim().length === 0) return false;
+    }
+  }
+  return true;
+};
+
 module.exports = {
   // employer login
   login: async (req, res, next) => {
-    const account = await employer.findOne({ email: req.body.email });
-    try {
-      const matches = await bcrypt.compare(req.body.password, account.password);
-      const accessToken = jwt.sign(
-        JSON.stringify(account),
-        process.env.JWT_KEY
-      );
-      if (matches) {
-        req.session.token = accessToken;
-        res.json({ accessToken: accessToken });
+    if (dataIsValid(req.body)) {
+      const username = req.body.username;
+      if (validateEmail(username)) {
+        // check xem co phai email k
+        var account = await employer.findOne({ email: username });
       } else {
-        res.json({ message: "Invalid Credentials" });
+        // k phai email
+        var account = await employer.findOne({ phone_number: username });
       }
-    } catch (error) {
-      console.log(error.message);
-    }
+      if (account) {
+        // co tai khoan
+        try {
+          const matches = await bcrypt.compare(
+            req.body.password,
+            account.password
+          );
+          const accessToken = jwt.sign(
+            JSON.stringify(account),
+            process.env.JWT_KEY
+          );
+          if (matches) {
+            req.session.token = accessToken;
+            res.json({ success: true, message: accessToken });
+          } else res.json({ success: false, message: "Invalid Credentials" });
+        } catch (error) {
+          console.log(error.message);
+        }
+      } // khong co tai khoan
+      else
+        res.json({
+          success: false,
+          message: "Email or phone number incorrect",
+        });
+    } else res.json({ success: false, message: "Data is null" });
   },
 
   // employer Register
   register: async (req, res, next) => {
-    try {
-      const hash_password = await bcrypt.hash(req.body.password, 10);
-      const model = new employer({
-        email: req.body.email,
-        password: hash_password,
-      });
-      model.save((error) => {
-        if (error) res.json({ msg: error.message });
-        else {
-          const walletModel = new wallet({
-            employer_id: model._id,
-            balance: 0,
+    if (dataIsValid(req.body)) {
+      try {
+        const username = req.body.username;
+        const hash_password = await bcrypt.hash(req.body.password, 10);
+        if (validateEmail(username)) {
+          // check xem co phai email k
+          var model = new employer({
+            email: username,
+            password: hash_password,
           });
-          walletModel.save((error) => {
-            if (error) res.json({ msg: error.message });
-            else res.json({ msg: "success" });
+        } else {
+          // k phai email
+          var model = new employer({
+            phone_number: username,
+            password: hash_password,
           });
         }
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+        model.save((error) => {
+          if (error) res.json({ success: false, message: error.message });
+          else {
+            const walletModel = new wallet({
+              employer_id: model._id,
+              balance: 0,
+            });
+            walletModel.save((error) => {
+              if (error) res.json({ success: false, message: error.message });
+              else res.json({ success: true, message: "Register success" });
+            });
+          }
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else res.json({ success: false, message: "Data is null" });
   },
 // update_profile_employer : async(req, res, next) =>{
 // try{
