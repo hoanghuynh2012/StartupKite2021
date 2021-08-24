@@ -1,6 +1,7 @@
 var candidate = require("../models/candidate.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+var user = require("../models/candidate.model");
 module.exports = {
   // user login
   login: async (req, res, next) => {
@@ -38,4 +39,36 @@ module.exports = {
       console.log(error.message);
     }
   },
+  // update profile user
+  // update_profile_user : async(req, res, next) =>{
+  //   try{
+  //     let id = req.params.id;
+  //     employer.findOne({ _id: id},(res,data) =>{
+  //       if (err) {
+  //         res.send({ error: err });
+  //       } else  {
+  //         data.id = req.body.id;
+  //         data.email = req.body.email;
+  //         data.password = data.password;
+  //         data.phone_number = req.body.phone_number;
+  //         data.full_name = req.body.full_name;
+  //         data.avatar = req.body.avatar;
+  //         data.date_of_birth = req.body.date_of_birth;
+  //         data.gender = req.body.gender;
+  //         data.level = req.body.level;
+  //         data.address = req.body.address;
+  //         data.role = "1";
+  //          data.save((err) => {
+  //               if (err) {
+  //                 res.send({ success: false, message: "update error!" });
+  //               } else {
+  //                 res.send({ success: true , message: "Update success"});
+  //               }
+  //             });
+  //       }
+  //     })
+  //   }catch (error) {
+  //     console.log(error.message);
+  //   }
+  //   },
 };

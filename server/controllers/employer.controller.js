@@ -2,6 +2,7 @@ var employer = require("../models/employer.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 var wallet = require("../models/wallet.model");
+var employer = require("../models/employer.model");
 module.exports = {
   // employer login
   login: async (req, res, next) => {
@@ -48,4 +49,33 @@ module.exports = {
       console.log(error.message);
     }
   },
+// update_profile_employer : async(req, res, next) =>{
+// try{
+//   let id = req.body.id;
+//   employer.findOne({ _id: id},(err,data) =>{
+//     if (err) {
+//       res.send({ error: err });
+//     } else  {
+//       data.email = req.body.email;
+//       data.password = data.password;
+//       data.employer_name = req.body.employer_name;
+//       data.phone_number = req.body.phone_number;
+//       data.owner_name = req.body.owner_name;
+//       data.image_url = req.body.image_url;
+//       data.address = req.body.address;
+//       data.information = req.body.information;
+//        data.save((err) => {
+//             if (err) {
+//               res.send({ success: false, message: "update error!" });
+//             } else {
+//               res.send({ success: true , message: "Update success" });
+//             }
+//           });
+//     }
+//   })
+// }catch (error) {
+//   res.send({ success: false, message: error.message });
+// }
+// },
+
 };
