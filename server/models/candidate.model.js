@@ -4,17 +4,16 @@ const ObjectId = Schema.ObjectId;
 
 const candidateSchema = new Schema({
   id: { type: ObjectId },
-  email: { type: String, unique: true },
+  email: { type: String, unique: true, sparse: true },
   password: { type: String },
-  phone_number: { type: String, default: "" },
-  full_name: { type: String, default: "" },
-  avatar: { type: String, default: "" },
-  date_of_birth: { type: Date, default: null },
-  gender: { type: String, default: "" },
-  level: { type: String, default: "" },
-  address: { type: String, default: "" },
+  phone_number: { type: String, unique: true, sparse: true, index: true },
+  full_name: { type: String },
+  avatar: { type: String },
+  date_of_birth: { type: Date },
+  gender: { type: String },
+  level: { type: String },
+  address: { type: String },
   role: { type: Number },
 });
 
 module.exports = mongoose.model("Candidates", candidateSchema);
-
