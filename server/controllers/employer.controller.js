@@ -94,33 +94,34 @@ module.exports = {
       }
     } else res.json({ success: false, message: "Data is null" });
   },
-// update_profile_employer : async(req, res, next) =>{
-// try{
-//   let id = req.body.id;
-//   employer.findOne({ _id: id},(err,data) =>{
-//     if (err) {
-//       res.send({ error: err });
-//     } else  {
-//       data.email = req.body.email;
-//       data.password = data.password;
-//       data.employer_name = req.body.employer_name;
-//       data.phone_number = req.body.phone_number;
-//       data.owner_name = req.body.owner_name;
-//       data.image_url = req.body.image_url;
-//       data.address = req.body.address;
-//       data.information = req.body.information;
-//        data.save((err) => {
-//             if (err) {
-//               res.send({ success: false, message: "update error!" });
-//             } else {
-//               res.send({ success: true , message: "Update success" });
-//             }
-//           });
-//     }
-//   })
-// }catch (error) {
-//   res.send({ success: false, message: error.message });
-// }
-// },
-
+  update_profile_employer: async (req, res, next) => {
+    try {
+      if (dataIsValid(req.body)) {
+        const {
+          id,
+          email,
+          employer_name,
+          phone_number,
+          owner_name,
+          image_url,
+          address,
+          information,
+        } = req.body;
+        const employers = await employer.findOne({ _id: id });
+        employers.email = email;
+        employers.phone_number = phone_number;
+        employers.employer_name = employer_name;
+        employers.owner_name = owner_name;
+        employers.image_url = image_url;
+        employers.information = information;
+        employers.address = address;
+        employers.save((error) => {
+          if (error) res.json({ success: false, message: error.message });
+          else res.json({ success: true, message: "Update success" });
+        });
+      } else res.send({ success: false, message: "Model not found" });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
 };

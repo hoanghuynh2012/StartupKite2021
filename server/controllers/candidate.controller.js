@@ -86,36 +86,38 @@ module.exports = {
       res.json({ success: false, message: "Data is null" });
     }
   },
-  // update profile user
-  // update_profile_user : async(req, res, next) =>{
-  //   try{
-  //     let id = req.params.id;
-  //     employer.findOne({ _id: id},(res,data) =>{
-  //       if (err) {
-  //         res.send({ error: err });
-  //       } else  {
-  //         data.id = req.body.id;
-  //         data.email = req.body.email;
-  //         data.password = data.password;
-  //         data.phone_number = req.body.phone_number;
-  //         data.full_name = req.body.full_name;
-  //         data.avatar = req.body.avatar;
-  //         data.date_of_birth = req.body.date_of_birth;
-  //         data.gender = req.body.gender;
-  //         data.level = req.body.level;
-  //         data.address = req.body.address;
-  //         data.role = "1";
-  //          data.save((err) => {
-  //               if (err) {
-  //                 res.send({ success: false, message: "update error!" });
-  //               } else {
-  //                 res.send({ success: true , message: "Update success"});
-  //               }
-  //             });
-  //       }
-  //     })
-  //   }catch (error) {
-  //     console.log(error.message);
-  //   }
-  //   },
+  update_profile_candidate: async (req, res, next) => {
+    try {
+      if (dataIsValid(req.body)) {
+        const {
+          id,
+          email,
+          phone_number,
+          full_name,
+          avatar,
+          date_of_birth,
+          gender,
+          level,
+          address,
+          role,
+        } = req.body;
+        const account = await candidate.findOne({ _id: id });
+        account.email = email;
+        account.phone_number = phone_number;
+        account.avatar = avatar;
+        account.full_name = full_name;
+        account.date_of_birth = date_of_birth;
+        account.gender = gender;
+        account.level = level;
+        account.address = address;
+        account.role = role;
+        account.save((error) => {
+          if (error) res.json({ success: false, message: error.message });
+          else res.json({ success: true, message: "Update success" });
+        });
+      } else res.send({ success: false, message: "Model not found" });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
 };

@@ -8,6 +8,6 @@ router.post("/login", controller.login); // login
 
 router.post("/register", controller.register); // register
 
-// router.post("/update_profile_employer", controller.update_profile_employer); // update_profile_employer
+router.post("/update-profile-employer", controller.update_profile_employer); // update_profile_employer
 
 module.exports = router;
