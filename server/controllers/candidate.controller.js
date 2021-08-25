@@ -86,4 +86,38 @@ module.exports = {
       res.json({ success: false, message: "Data is null" });
     }
   },
+  update_profile_candidate: async (req, res, next) => {
+    try {
+      if (dataIsValid(req.body)) {
+        const {
+          id,
+          email,
+          phone_number,
+          full_name,
+          avatar,
+          date_of_birth,
+          gender,
+          level,
+          address,
+          role,
+        } = req.body;
+        const account = await candidate.findOne({ _id: id });
+        account.email = email;
+        account.phone_number = phone_number;
+        account.avatar = avatar;
+        account.full_name = full_name;
+        account.date_of_birth = date_of_birth;
+        account.gender = gender;
+        account.level = level;
+        account.address = address;
+        account.role = role;
+        account.save((error) => {
+          if (error) res.json({ success: false, message: error.message });
+          else res.json({ success: true, message: "Update success" });
+        });
+      } else res.send({ success: false, message: "Model not found" });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
 };
