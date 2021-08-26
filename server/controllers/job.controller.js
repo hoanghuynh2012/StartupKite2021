@@ -27,7 +27,7 @@ module.exports = {
       if (dataIsValid) {
         const model = new job(req.body);
         model["create_at"] = Date.now();
-        model["date_update"] = Date.now();
+        model["update_at"] = Date.now();
         model.save((error) => {
           if (error) {
             res.send({ success: false, message: error });
@@ -72,7 +72,7 @@ module.exports = {
         _job.wage = wage;
         _job.role = role;
         _job.work_place = work_place;
-        _job.date_update = Date.now();
+        _job.update_at = Date.now();
 
         _job.save((error) => {
           if (error) res.json({ success: false, message: error.message });
