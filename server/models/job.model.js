@@ -16,7 +16,7 @@ const jobSchema = new Schema({
   work_place: { type: String },
   wage: { type: String },
   create_at: { type: Date },
-  date_update: { type: Date },
+  update_at: { type: Date },
   role: { type: Number },
   status: { type: Boolean, default: true },
 });
