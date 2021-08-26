@@ -11,5 +11,6 @@ const transactionSchema = new Schema({
   create_at: { type: Date, default: Date.now },
   status: { type: Boolean, default: true },
 });
+// có 7 thuộc tính
 
 module.exports = mongoose.model("Transactions", transactionSchema);

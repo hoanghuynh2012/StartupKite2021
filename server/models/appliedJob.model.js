@@ -9,5 +9,6 @@ const appliedJobSchema = new Schema({
   apply_at: { type: Date, default: Date.now },
   status: { type: Boolean, default: true },
 });
+// có 5 thuộc tính
 
 module.exports = mongoose.model("AppliedJobs", appliedJobSchema);
