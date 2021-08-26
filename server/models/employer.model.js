@@ -13,5 +13,6 @@ const employerSchema = new Schema({
   address: { type: String },
   information: { type: String },
 });
+// có 9 thuộc tính
 
 module.exports = mongoose.model("Employers", employerSchema);

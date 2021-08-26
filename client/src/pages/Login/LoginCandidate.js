@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { loginApi } from "../../apis/candidate.api.js";
 
-const Login = () => {
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+const LoginCandidate = () => {
+  // const [username, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
 
   useEffect(() => {
     const login = async (username, password) => {
@@ -20,4 +20,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginCandidate;

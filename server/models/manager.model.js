@@ -10,5 +10,6 @@ const managerSchema = new Schema({
   phone_number: { type: String },
   role: { type: Number },
 });
+// có 6 thuộc tính
 
 module.exports = mongoose.model("Managers", managerSchema);

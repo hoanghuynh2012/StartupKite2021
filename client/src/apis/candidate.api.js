@@ -1,7 +1,7 @@
 export const loginApi = async (us, pw) => {
   const response = await fetch("http://localhost:8080/candidate/login/", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
+    method: "POST",
+    mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
@@ -11,6 +11,6 @@ export const loginApi = async (us, pw) => {
   if (res) {
     return res;
   } else {
-    return { success: false, message: "Not Data" };
+    return { success: false, message: "No Data" };
   }
 };

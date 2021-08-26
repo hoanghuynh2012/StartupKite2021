@@ -15,5 +15,6 @@ const candidateSchema = new Schema({
   address: { type: String },
   role: { type: Number },
 });
+// có 11 thuộc tính
 
 module.exports = mongoose.model("Candidates", candidateSchema);

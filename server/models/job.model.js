@@ -18,9 +18,10 @@ const jobSchema = new Schema({
   create_at: { type: Date },
   update_at: { type: Date },
   role: { type: Number },
+  expiry_date: { type: Date },
   status: { type: Boolean, default: true },
 });
 
-// có 15 thuộc tính
+// có 16 thuộc tính
 
 module.exports = mongoose.model("Jobs", jobSchema);
